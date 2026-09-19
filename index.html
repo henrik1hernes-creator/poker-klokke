@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poker Clock</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===================== SETUP SCREEN ===================== -->
+<section id="setup-screen" class="screen">
+  <div class="setup-card">
+    <h1>♠ Poker Clock</h1>
+    <p class="subtitle">Set up your tournament</p>
+
+    <form id="setup-form">
+      <div class="field">
+        <label for="players">Number of players</label>
+        <input type="number" id="players" min="2" max="50" value="8" required>
+      </div>
+
+      <div class="field">
+        <label for="buyin">Buy-in (kr)</label>
+        <input type="number" id="buyin" min="1" step="1" value="200" required>
+      </div>
+
+      <fieldset class="field">
+        <legend>Time of play</legend>
+        <div class="hm-row">
+          <div>
+            <input type="number" id="hours" min="0" max="24" value="2">
+            <label for="hours">hours</label>
+          </div>
+          <div>
+            <input type="number" id="minutes" min="0" max="59" value="0">
+            <label for="minutes">minutes</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend>Last possible buy-in (after start)</legend>
+        <div class="hm-row">
+          <div>
+            <input type="number" id="lastbuyin-hours" min="0" max="24" value="1">
+            <label for="lastbuyin-hours">hours</label>
+          </div>
+          <div>
+            <input type="number" id="lastbuyin-minutes" min="0" max="59" value="0">
+            <label for="lastbuyin-minutes">minutes</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <div id="setup-error" class="error" hidden></div>
+
+      <button type="submit" class="btn btn-primary btn-large">Start Tournament</button>
+    </form>
+  </div>
+</section>
+
+<!-- ===================== CLOCK SCREEN ===================== -->
+<section id="clock-screen" class="screen hidden">
+  <header class="clock-header">
+    <div class="level-info">
+      <span id="level-label">Level 1 / 8</span>
+    </div>
+    <div class="tournament-time">
+      <span id="total-elapsed">00:00:00</span> elapsed &middot;
+      <span id="total-remaining">00:00:00</span> remaining
+    </div>
+    <button id="new-game-btn" class="btn btn-ghost">New Game</button>
+  </header>
+
+  <main class="clock-main">
+    <div class="blinds-display">
+      <div class="blind-box">
+        <span class="blind-label">Small Blind</span>
+        <span id="small-blind" class="blind-value">1</span>
+      </div>
+      <div class="blind-box">
+        <span class="blind-label">Big Blind</span>
+        <span id="big-blind" class="blind-value">5</span>
+      </div>
+      <div class="blind-box" id="ante-box">
+        <span class="blind-label">Ante</span>
+        <span id="ante" class="blind-value">0</span>
+      </div>
+    </div>
+
+    <div class="timer-wrap">
+      <div id="level-timer" class="level-timer">15:00</div>
+      <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+    </div>
+
+    <div class="next-level">
+      Next level: SB <span id="next-small">2</span> / BB <span id="next-big">7</span>
+      <span id="next-ante-wrap">/ Ante <span id="next-ante">0</span></span>
+    </div>
+
+    <div class="buyin-status">
+      <span id="buyin-status-text" class="buyin-open">Buy-ins open</span>
+      <span id="buyin-countdown"></span>
+    </div>
+
+    <div class="pot-info">
+      <div class="pot-stat">
+        <span class="pot-label">Players</span>
+        <span id="players-count" class="pot-value">8</span>
+      </div>
+      <div class="pot-stat">
+        <span class="pot-label">Extra buy-ins</span>
+        <span id="extra-buyins-count" class="pot-value">0</span>
+      </div>
+      <div class="pot-stat">
+        <span class="pot-label">Total pot</span>
+        <span id="total-pot" class="pot-value">1600 kr</span>
+      </div>
+    </div>
+  </main>
+
+  <footer class="clock-controls">
+    <button id="prev-level-btn" class="btn btn-ghost">&laquo; Prev Level</button>
+    <button id="pause-btn" class="btn btn-secondary">Pause</button>
+    <button id="buyin-btn" class="btn btn-primary">+ Buy-in</button>
+    <button id="next-level-btn" class="btn btn-ghost">Next Level &raquo;</button>
+  </footer>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
